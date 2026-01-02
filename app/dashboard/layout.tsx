@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Package2, LayoutDashboard, CalendarDays, Archive, LogOut, Bell, Settings } from 'lucide-react'
 import { logout } from './actions'
 import { Button } from '@/components/ui/button'
+import { MobileNav } from '@/components/mobile-nav'
 
 export default function DashboardLayout({
   children,
@@ -69,6 +70,7 @@ export default function DashboardLayout({
       </div>
       <div className="flex flex-col">
         <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-white/50 backdrop-blur-md sticky top-0 z-10 px-6">
+          <MobileNav />
           <div className="w-full flex-1">
              <h1 className="text-lg font-semibold text-slate-900">Admin Dashboard</h1>
           </div>

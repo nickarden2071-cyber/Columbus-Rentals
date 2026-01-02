@@ -1,75 +1,39 @@
-# Columbus Rentals - Equipment Management System
+# Columbus Rentals - Equipment Management System (V1)
 
-A production-ready V1 internal tool for managing equipment rentals, built with Next.js, Tailwind CSS, and Supabase.
+A professional equipment rental and inventory management system built for Columbus Rentals. This Version 1 release provides a robust foundation for tracking assets, managing bookings, and preventing over-scheduling.
 
-## Features
+## 🚀 Key Features
 
-- **Inventory Management**: Track equipment, quantities, and status (Available/Maintenance).
-- **Booking System**: Create date-based rentals with automatic availability checks.
-- **Availability Engine**: Prevents overbooking and handles buffer days between rentals.
-- **Admin Dashboard**: Overview of active rentals, upcoming returns, and maintenance items.
-- **Authentication**: Secure admin-only access via Supabase Auth.
+### 1. Unified Dashboard
+- **Real-time Stats:** Instant visibility into active rentals, total inventory, and items in maintenance.
+- **Return Tracking:** A prioritized list of equipment due back in the next few days.
+- **Quick Actions:** Shortcuts for the most frequent tasks like creating bookings or adding inventory.
 
-## Tech Stack
+### 2. Smart Inventory Management
+- **Categorization:** Organize equipment into custom categories (e.g., Heavy Machinery, Power Tools).
+- **Status Tracking:** Toggle between "Available" and "Maintenance" to ensure only quality gear is rented.
+- **Live Search:** Quickly find specific items by name across your entire catalog.
 
-- **Frontend**: Next.js 14 (App Router), React, Tailwind CSS, Lucide Icons
-- **Backend**: Node.js, Next.js Server Actions
-- **Database**: PostgreSQL (Supabase)
-- **Auth**: Supabase Auth
+### 3. Conflict-Free Booking Engine
+- **Availability Logic:** The system automatically calculates stock levels to prevent overbooking.
+- **Buffer Days:** Configurable turnaround time between rentals to allow for cleaning and maintenance.
+- **Active Management:** View, track, and cancel bookings from a centralized professional table.
 
-## Getting Started
+### 4. Admin Configuration
+- **Global Settings:** Centralized control for buffer days and category CRUD operations.
+- **Secure Access:** Protected by Supabase Authentication to ensure only authorized staff can manage the system.
 
-### Prerequisites
+## 🛠 Tech Stack
+- **Frontend:** Next.js 15 (App Router), Tailwind CSS, Lucide Icons.
+- **Backend:** Supabase (PostgreSQL, Auth, RLS).
+- **Deployment:** Vercel (Recommended).
 
-1. Node.js (v18+)
-2. npm
-3. A Supabase project
+## 📖 Getting Started for Clients
 
-### Setup
+1. **Login:** Use your admin credentials to access the [Dashboard](https://columbus-rentals.vercel.app/dashboard).
+2. **Setup:** Go to **Settings** to define your equipment categories and preferred buffer days.
+3. **Add Inventory:** Populated your catalog in the **Inventory** section.
+4. **Start Renting:** Create your first booking through the **Bookings** page or the Dashboard shortcut.
 
-1. **Clone the repository**
-   ```bash
-   git clone <repo-url>
-   cd columbus-rentals
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Configure Environment Variables**
-   Create a `.env.local` file in the root directory:
-   ```env
-   NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-   ```
-
-4. **Database Setup**
-   - Go to your Supabase project's SQL Editor.
-   - Run the contents of `supabase/schema.sql` to create tables and policies.
-   - (Optional) Create your first admin user in Supabase Authentication > Users.
-
-5. **Run the Development Server**
-   ```bash
-   npm run dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000).
-
-## Deployment (Vercel)
-
-1. Push your code to a Git repository (GitHub/GitLab/Bitbucket).
-2. Import the project into Vercel.
-3. Add the `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` environment variables in Vercel project settings.
-4. Deploy.
-
-## Architecture Highlights
-
-- **Availability Service**: Located in `services/availability.ts`. This is the core logic engine that calculates if an item can be booked for a specific date range, considering existing bookings and buffer times.
-- **Notifications**: `services/notifications.ts` provides an extensible abstraction for sending alerts (currently logs to console, ready for email/SMS integration).
-- **Server Actions**: All mutations (create/update/delete) are handled via Next.js Server Actions in `actions.ts` files within each feature directory.
-- **Middleware**: `middleware.ts` handles session refreshment and route protection.
-
-## License
-
-Private / Proprietary
+---
+*Developed for Columbus Rentals - 2024*

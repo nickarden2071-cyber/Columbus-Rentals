@@ -4,14 +4,25 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { createClient } from '@/utils/supabase/server'
 import { deleteEquipment } from './actions'
+import { SearchInput } from '@/components/search-input'
 
-export default async function InventoryPage() {
+export default async function InventoryPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>
+}) {
+  const query = (await searchParams).q
   const supabase = await createClient()
   
-  const { data: equipment, error } = await supabase
+  let dbQuery = supabase
     .from('equipment')
     .select('*')
-    .order('created_at', { ascending: false })
+    
+  if (query) {
+    dbQuery = dbQuery.ilike('name', `%${query}%`)
+  }
+
+  const { data: equipment, error } = await dbQuery.order('created_at', { ascending: false })
 
   if (error) {
     console.error("Error fetching inventory:", error)
@@ -30,6 +41,10 @@ export default async function InventoryPage() {
                 Add Equipment
             </Link>
         </Button>
+      </div>
+
+      <div className="flex items-center gap-4">
+        <SearchInput placeholder="Search equipment by name..." />
       </div>
       
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
