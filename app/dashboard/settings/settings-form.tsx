@@ -112,7 +112,14 @@ export default function SettingsPage({ initialBuffer, categories }: { initialBuf
                 {categories.map((cat) => (
                   <div key={cat.id} className="flex items-center justify-between p-2 border rounded-md bg-white">
                     <span className="text-sm font-medium">{cat.name}</span>
-                    <form action={deleteCategory.bind(null, cat.id)}>
+                    <form 
+                      action={async () => {
+                        const result = await deleteCategory(cat.id)
+                        if (result?.error) {
+                          alert(result.error)
+                        }
+                      }}
+                    >
                       <Button variant="ghost" size="icon" className="h-8 w-8 text-red-500 hover:text-red-600 hover:bg-red-50">
                         <Trash2 className="h-4 w-4" />
                       </Button>
